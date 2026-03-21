@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # Redis for Celery
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+  # IraqQuant Web Application
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - LOG_LEVEL=INFO
+    depends_on:
+      - redis
+    volumes:
+      - ./backend/app:/app/app
+      - ./frontend:/app/frontend
+    restart: unless-stopped
+
+  # Celery Worker
+  worker:
+    build: .
+    command: celery -A app.workers.tasks worker --loglevel=info --concurrency=2
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    volumes:
+      - ./backend/app:/app/app
+    restart: unless-stopped
+
+  # Celery Beat (Periodic Tasks)
+  beat:
+    build: .
+    command: celery -A app.workers.tasks beat --loglevel=info
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    volumes:
+      - ./backend/app:/app/app
+    restart: unless-stopped
+
+volumes:
+  redis_data:
