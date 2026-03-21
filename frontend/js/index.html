@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IraqQuant - منصة الحوسبة الكمومية</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <style>
+    .lang-switcher {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1.5px solid var(--primary-color);
+      color: var(--primary-color);
+      border-radius: 6px;
+      padding: .3rem .7rem;
+      font-size: .8rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all .2s;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+    [data-lang] { display: none; }
+    .lang-ar [data-lang="ar"],
+    .lang-en [data-lang="en"],
+    .lang-de [data-lang="de"] { display: block; }
+    span[data-lang] { display: none; }
+    .lang-ar span[data-lang="ar"],
+    .lang-en span[data-lang="en"],
+    .lang-de span[data-lang="de"] { display: inline; }
+    .lang-en, .lang-de { direction: ltr; font-family: 'Segoe UI', sans-serif; }
+  </style>
+</head>
+<body class="lang-ar">
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <h1>🇮🇶 IraqQuant</h1>
+        <span class="tagline">
+          <span data-lang="ar">منصة الحوسبة الكمومية</span>
+          <span data-lang="en">Quantum Computing Platform</span>
+          <span data-lang="de">Quantencomputing-Plattform</span>
+        </span>
+      </div>
+      <div class="nav-menu">
+        <a href="#home" class="nav-link active">
+          <span data-lang="ar">الرئيسية</span>
+          <span data-lang="en">Home</span>
+          <span data-lang="de">Startseite</span>
+        </a>
+        <a href="#about" class="nav-link">
+          <span data-lang="ar">عن المنصة</span>
+          <span data-lang="en">About</span>
+          <span data-lang="de">Über uns</span>
+        </a>
+        <a href="#features" class="nav-link">
+          <span data-lang="ar">الميزات</span>
+          <span data-lang="en">Features</span>
+          <span data-lang="de">Funktionen</span>
+        </a>
+        <a href="#playground" class="nav-link">
+          <span data-lang="ar">المختبر</span>
+          <span data-lang="en">Playground</span>
+          <span data-lang="de">Labor</span>
+        </a>
+      </div>
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" onclick="setLang('ar')">ع</button>
+          <button class="lang-btn" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" onclick="setLang('de')">DE</button>
+        </div>
+        <button class="btn-secondary" id="btnSignIn">
+          <span data-lang="ar">تسجيل دخول</span>
+          <span data-lang="en">Sign In</span>
+          <span data-lang="de">Anmelden</span>
+        </button>
+        <button class="btn-primary" id="btnSignUp">
+          <span data-lang="ar">إنشاء حساب</span>
+          <span data-lang="en">Sign Up</span>
+          <span data-lang="de">Registrieren</span>
+        </button>
+        <div class="user-menu" id="userMenu" style="display:none">
+          <span id="username"></span>
+          <button class="btn-secondary" id="btnLogout">
+            <span data-lang="ar">تسجيل خروج</span>
+            <span data-lang="en">Logout</span>
+            <span data-lang="de">Abmelden</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+
+        <div data-lang="ar">
+          <h1 class="hero-title">
+            منصة كمومية برمجية متقدمة<br>
+            <span class="gradient-text">صُنعت في العراق 🇮🇶</span>
+          </h1>
+          <p class="hero-subtitle">
+            منصة برمجية حقيقية لتنفيذ الخوارزميات الكمومية بدقة عالية،
+            مع دعم كامل لتصحيح الأخطاء ونماذج أخطاء واقعية.
+          </p>
+        </div>
+
+        <div data-lang="en">
+          <h1 class="hero-title">
+            Advanced Software-Based<br>
+            <span class="gradient-text">Quantum Platform 🇮🇶</span>
+          </h1>
+          <p class="hero-subtitle">
+            A real software quantum computing platform for executing quantum algorithms
+            with full quantum error correction and hardware-calibrated noise models.
+          </p>
+        </div>
+
+        <div data-lang="de">
+          <h1 class="hero-title">
+            Fortgeschrittene Software-basierte<br>
+            <span class="gradient-text">Quantenplattform 🇮🇶</span>
+          </h1>
+          <p class="hero-subtitle">
+            Eine echte Software-Quantencomputing-Plattform zur Ausführung von Quantenalgorithmen
+            mit vollständiger Quantenfehlerkorrektur und hardware-kalibrierten Rauschmodellen.
+          </p>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number">127</div>
+            <div class="stat-label">
+              <span data-lang="ar">كيوبت فيزيائي</span>
+              <span data-lang="en">Physical Qubits</span>
+              <span data-lang="de">Physische Qubits</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">2</div>
+            <div class="stat-label">
+              <span data-lang="ar">نوع تشغيل</span>
+              <span data-lang="en">Backends</span>
+              <span data-lang="de">Backends</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">QEC</div>
+            <div class="stat-label">
+              <span data-lang="ar">تصحيح أخطاء</span>
+              <span data-lang="en">Error Correction</span>
+              <span data-lang="de">Fehlerkorrektur</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <button class="btn-large btn-primary" id="btnGetStarted">
+            <span data-lang="ar">ابدأ الآن</span>
+            <span data-lang="en">Get Started</span>
+            <span data-lang="de">Jetzt starten</span>
+          </button>
+          <button class="btn-large btn-secondary" id="btnLearnMore">
+            <span data-lang="ar">اعرف أكثر</span>
+            <span data-lang="en">Learn More</span>
+            <span data-lang="de">Mehr erfahren</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">
+        <span data-lang="ar">الميزات الرئيسية</span>
+        <span data-lang="en">Key Features</span>
+        <span data-lang="de">Hauptfunktionen</span>
+      </h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>
+            <span data-lang="ar">محرك تنفيذ كمومي محسّن</span>
+            <span data-lang="en">Optimized Quantum Execution Engine</span>
+            <span data-lang="de">Optimierte Quantenausführungs-Engine</span>
+          </h3>
+          <p>
+            <span data-lang="ar">تنفيذ برمجي حقيقي لدوائر الكيوبتات باستخدام أحدث طرق الشبكات الترابطية على أي جهاز.</span>
+            <span data-lang="en">Real software execution of qubit circuits using the latest tensor network methods on any hardware.</span>
+            <span data-lang="de">Echte Software-Ausführung von Qubit-Schaltkreisen mit modernsten Tensornetzwerk-Methoden auf jeder Hardware.</span>
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>
+            <span data-lang="ar">تصحيح الأخطاء الكمومية</span>
+            <span data-lang="en">Quantum Error Correction</span>
+            <span data-lang="de">Quantenfehlerkorrektur</span>
+          </h3>
+          <p>
+            <span data-lang="ar">نظام مدمج لتحويل الكيوبتات الفيزيائية إلى منطقية نظيفة مع تقليل الأخطاء بشكل كبير.</span>
+            <span data-lang="en">Built-in system to convert physical qubits to clean logical qubits with significant error reduction.</span>
+            <span data-lang="de">Integriertes System zur Umwandlung physischer Qubits in saubere logische Qubits mit erheblicher Fehlerreduzierung.</span>
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>
+            <span data-lang="ar">تعدد أنواع التشغيل</span>
+            <span data-lang="en">Multi-Backend Support</span>
+            <span data-lang="de">Multi-Backend-Unterstützung</span>
+          </h3>
+          <p>
+            <span data-lang="ar">دعم أنواع مختلفة من أنظمة تنفيذ الدوائر الكمومية ضمن منصة موحدة.</span>
+            <span data-lang="en">Support for different quantum circuit execution systems within a unified platform.</span>
+            <span data-lang="de">Unterstützung verschiedener Quantenschaltkreis-Ausführungssysteme innerhalb einer einheitlichen Plattform.</span>
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>
+            <span data-lang="ar">نماذج أخطاء واقعية</span>
+            <span data-lang="en">Realistic Noise Models</span>
+            <span data-lang="de">Realistische Rauschmodelle</span>
+          </h3>
+          <p>
+            <span data-lang="ar">نماذج أخطاء معايرة على أجهزة كمومية فيزيائية حقيقية لنتائج أكثر دقة.</span>
+            <span data-lang="en">Error models calibrated on real physical quantum hardware for more accurate results.</span>
+            <span data-lang="de">Auf echter physischer Quantenhardware kalibrierte Fehlermodelle für genauere Ergebnisse.</span>
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>
+            <span data-lang="ar">واجهة برمجية متكاملة</span>
+            <span data-lang="en">Full REST API</span>
+            <span data-lang="de">Vollständige REST-API</span>
+          </h3>
+          <p>
+            <span data-lang="ar">واجهة برمجية كاملة للتكامل مع الأدوات والبيئات البحثية الخارجية.</span>
+            <span data-lang="en">Complete API for integration with external research tools and environments.</span>
+            <span data-lang="de">Vollständige API zur Integration mit externen Forschungstools und -umgebungen.</span>
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>
+            <span data-lang="ar">مفتوح المصدر</span>
+            <span data-lang="en">Open Source</span>
+            <span data-lang="de">Open Source</span>
+          </h3>
+          <p>
+            <span data-lang="ar">متاح بالكامل للباحثين والمطورين والمؤسسات الأكاديمية مجاناً.</span>
+            <span data-lang="en">Fully available to researchers, developers, and academic institutions for free.</span>
+            <span data-lang="de">Vollständig kostenlos für Forscher, Entwickler und akademische Einrichtungen verfügbar.</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Playground -->
+  <section id="playground" class="playground" style="display:none">
+    <div class="container">
+      <h2 class="section-title">
+        <span data-lang="ar">المختبر الكمومي</span>
+        <span data-lang="en">Quantum Playground</span>
+        <span data-lang="de">Quantenlabor</span>
+      </h2>
+      <div class="playground-container">
+
+        <div class="circuit-panel">
+          <h3>
+            <span data-lang="ar">بناء الدائرة الكمومية</span>
+            <span data-lang="en">Build Quantum Circuit</span>
+            <span data-lang="de">Quantenschaltkreis aufbauen</span>
+          </h3>
+          <div class="circuit-controls">
+            <label>
+              <span data-lang="ar">عدد الكيوبتات</span>
+              <span data-lang="en">Number of Qubits</span>
+              <span data-lang="de">Anzahl der Qubits</span>
+              <input type="number" id="numQubits" min="1" max="127" value="2">
+            </label>
+            <label>
+              <span data-lang="ar">عدد القياسات</span>
+              <span data-lang="en">Shots</span>
+              <span data-lang="de">Messungen</span>
+              <input type="number" id="numShots" min="1" max="10000" value="1024">
+            </label>
+            <label>
+              <span data-lang="ar">نوع التشغيل</span>
+              <span data-lang="en">Backend</span>
+              <span data-lang="de">Backend</span>
+              <select id="backend">
+                <option value="mps">MPS (Matrix Product State)</option>
+                <option value="photonic">Photonic</option>
+              </select>
+            </label>
+            <label style="flex-direction:row;align-items:center;gap:.5rem">
+              <input type="checkbox" id="useQEC">
+              <span data-lang="ar">تصحيح الأخطاء الكمومية (QEC)</span>
+              <span data-lang="en">Quantum Error Correction (QEC)</span>
+              <span data-lang="de">Quantenfehlerkorrektur (QEC)</span>
+            </label>
+            <label style="flex-direction:row;align-items:center;gap:.5rem">
+              <input type="checkbox" id="useNoise">
+              <span data-lang="ar">نموذج أخطاء واقعي</span>
+              <span data-lang="en">Realistic Noise Model</span>
+              <span data-lang="de">Realistisches Rauschmodell</span>
+            </label>
+          </div>
+
+          <div class="gate-buttons">
+            <h4>
+              <span data-lang="ar">البوابات الكمومية</span>
+              <span data-lang="en">Quantum Gates</span>
+              <span data-lang="de">Quantengatter</span>
+            </h4>
+            <button class="gate-btn" data-gate="h">H</button>
+            <button class="gate-btn" data-gate="x">X</button>
+            <button class="gate-btn" data-gate="y">Y</button>
+            <button class="gate-btn" data-gate="z">Z</button>
+            <button class="gate-btn" data-gate="s">S</button>
+            <button class="gate-btn" data-gate="t">T</button>
+            <button class="gate-btn" data-gate="cx">CX</button>
+            <button class="gate-btn" data-gate="cz">CZ</button>
+            <button class="gate-btn" data-gate="swap">SWAP</button>
+          </div>
+
+          <div class="circuit-display" id="circuitDisplay">
+            <p class="placeholder">
+              <span data-lang="ar">قم بإضافة بوابات لبناء الدائرة</span>
+              <span data-lang="en">Add gates to build your circuit</span>
+              <span data-lang="de">Fügen Sie Gatter hinzu, um Ihren Schaltkreis aufzubauen</span>
+            </p>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-primary btn-large" id="btnRunCircuit">
+              ▶ <span data-lang="ar">تشغيل الدائرة</span>
+              <span data-lang="en">Run Circuit</span>
+              <span data-lang="de">Schaltkreis ausführen</span>
+            </button>
+            <button class="btn-secondary" id="btnClearCircuit">
+              <span data-lang="ar">مسح</span>
+              <span data-lang="en">Clear</span>
+              <span data-lang="de">Löschen</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="results-panel">
+          <h3>
+            <span data-lang="ar">النتائج</span>
+            <span data-lang="en">Results</span>
+            <span data-lang="de">Ergebnisse</span>
+          </h3>
+          <div id="jobStatus" class="job-status"
+               style="background:#d1fae5;border-left:4px solid #10b981;padding:1rem;border-radius:4px">
+            <p>
+              <span data-lang="ar">جاهز لتنفيذ دائرة كمومية</span>
+              <span data-lang="en">Ready to execute a quantum circuit</span>
+              <span data-lang="de">Bereit zur Ausführung eines Quantenschaltkreises</span>
+            </p>
+          </div>
+          <div id="results" class="results-display" style="display:none;margin-top:1rem">
+            <canvas id="resultsChart"></canvas>
+            <div id="resultStats"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">
+        <span data-lang="ar">عن المنصة</span>
+        <span data-lang="en">About the Platform</span>
+        <span data-lang="de">Über die Plattform</span>
+      </h2>
+      <div class="about-content">
+
+        <div data-lang="ar">
+          <p class="lead">
+            IraqQuant منصة كمومية برمجية متقدمة تنفذ خوارزميات كمومية حقيقية،
+            تم تطويرها لتكون مرجعاً بحثياً وأكاديمياً في مجال الخوارزميات الكمومية،
+            مع التركيز على الدقة والأداء.
+          </p>
+          <div class="project-goals">
+            <h3>أهداف المنصة</h3>
+            <ul>
+              <li>توفير منصة كمومية برمجية حقيقية ومجانية للباحثين</li>
+              <li>دعم البحث الأكاديمي في الحوسبة الكمومية</li>
+              <li>المساهمة في تطوير المجتمع العلمي العربي</li>
+              <li>المنافسة على المستوى العالمي من العراق 🇮🇶</li>
+            </ul>
+          </div>
+        </div>
+
+        <div data-lang="en">
+          <p class="lead">
+            IraqQuant is an advanced software-based quantum computing platform that executes
+            real quantum algorithms. Developed as an academic and research reference in the field
+            of quantum algorithms, with a focus on accuracy and performance.
+          </p>
+          <div class="project-goals">
+            <h3>Platform Goals</h3>
+            <ul>
+              <li>Provide a real, free software quantum platform for researchers</li>
+              <li>Support academic research in quantum computing</li>
+              <li>Contribute to the development of the Arab scientific community</li>
+              <li>Compete globally from Iraq 🇮🇶</li>
+            </ul>
+          </div>
+        </div>
+
+        <div data-lang="de">
+          <p class="lead">
+            IraqQuant ist eine fortgeschrittene Software-basierte Quantencomputing-Plattform,
+            die echte Quantenalgorithmen ausführt. Entwickelt als akademische und wissenschaftliche
+            Referenz im Bereich der Quantenalgorithmen, mit Fokus auf Genauigkeit und Leistung.
+          </p>
+          <div class="project-goals">
+            <h3>Plattformziele</h3>
+            <ul>
+              <li>Bereitstellung einer echten, kostenlosen Software-Quantenplattform für Forscher</li>
+              <li>Unterstützung der akademischen Forschung im Quantencomputing</li>
+              <li>Beitrag zur Entwicklung der arabischen wissenschaftlichen Gemeinschaft</li>
+              <li>Weltweiter Wettbewerb aus dem Irak 🇮🇶</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>IraqQuant</h3>
+          <p>
+            <span data-lang="ar">منصة الحوسبة الكمومية البرمجية</span>
+            <span data-lang="en">Software Quantum Computing Platform</span>
+            <span data-lang="de">Software-Quantencomputing-Plattform</span>
+          </p>
+          <p class="version">v1.0.0</p>
+        </div>
+        <div class="footer-section">
+          <h4>
+            <span data-lang="ar">روابط سريعة</span>
+            <span data-lang="en">Quick Links</span>
+            <span data-lang="de">Schnelllinks</span>
+          </h4>
+          <ul>
+            <li><a href="#features">
+              <span data-lang="ar">الميزات</span>
+              <span data-lang="en">Features</span>
+              <span data-lang="de">Funktionen</span>
+            </a></li>
+            <li><a href="#playground">
+              <span data-lang="ar">المختبر</span>
+              <span data-lang="en">Playground</span>
+              <span data-lang="de">Labor</span>
+            </a></li>
+            <li><a href="/api/info" target="_blank">API</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>
+            <span data-lang="ar">التواصل</span>
+            <span data-lang="en">Contact</span>
+            <span data-lang="de">Kontakt</span>
+          </h4>
+          <p>🇮🇶
+            <span data-lang="ar">صُنع بفخر في العراق</span>
+            <span data-lang="en">Made with pride in Iraq</span>
+            <span data-lang="de">Mit Stolz im Irak entwickelt</span>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 IraqQuant.
+          <span data-lang="ar">مشروع مفتوح المصدر.</span>
+          <span data-lang="en">Open Source Project.</span>
+          <span data-lang="de">Open-Source-Projekt.</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sign In Modal -->
+  <div id="signInModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>
+        <span data-lang="ar">تسجيل الدخول</span>
+        <span data-lang="en">Sign In</span>
+        <span data-lang="de">Anmelden</span>
+      </h2>
+      <form id="signInForm">
+        <div class="form-group">
+          <label>
+            <span data-lang="ar">اسم المستخدم</span>
+            <span data-lang="en">Username</span>
+            <span data-lang="de">Benutzername</span>
+          </label>
+          <input type="text" id="signInUsername" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label>
+            <span data-lang="ar">كلمة المرور</span>
+            <span data-lang="en">Password</span>
+            <span data-lang="de">Passwort</span>
+          </label>
+          <input type="password" id="signInPassword" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary btn-large" style="width:100%">
+          <span data-lang="ar">دخول</span>
+          <span data-lang="en">Sign In</span>
+          <span data-lang="de">Anmelden</span>
+        </button>
+      </form>
+      <p class="form-footer">
+        <span data-lang="ar">لا تملك حساباً؟</span>
+        <span data-lang="en">Don't have an account?</span>
+        <span data-lang="de">Kein Konto?</span>
+        <a href="#" id="switchToSignUp">
+          <span data-lang="ar">إنشاء حساب جديد</span>
+          <span data-lang="en">Create account</span>
+          <span data-lang="de">Konto erstellen</span>
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div id="signUpModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>
+        <span data-lang="ar">إنشاء حساب جديد</span>
+        <span data-lang="en">Create Account</span>
+        <span data-lang="de">Konto erstellen</span>
+      </h2>
+      <form id="signUpForm">
+        <div class="form-group">
+          <label>
+            <span data-lang="ar">اسم المستخدم</span>
+            <span data-lang="en">Username</span>
+            <span data-lang="de">Benutzername</span>
+          </label>
+          <input type="text" id="signUpUsername" required minlength="3" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label>
+            <span data-lang="ar">البريد الإلكتروني</span>
+            <span data-lang="en">Email</span>
+            <span data-lang="de">E-Mail</span>
+          </label>
+          <input type="email" id="signUpEmail" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>
+            <span data-lang="ar">كلمة المرور</span>
+            <span data-lang="en">Password</span>
+            <span data-lang="de">Passwort</span>
+          </label>
+          <input type="password" id="signUpPassword" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn-primary btn-large" style="width:100%">
+          <span data-lang="ar">إنشاء حساب</span>
+          <span data-lang="en">Create Account</span>
+          <span data-lang="de">Konto erstellen</span>
+        </button>
+      </form>
+      <p class="form-footer">
+        <span data-lang="ar">لديك حساب؟</span>
+        <span data-lang="en">Already have an account?</span>
+        <span data-lang="de">Bereits ein Konto?</span>
+        <a href="#" id="switchToSignIn">
+          <span data-lang="ar">تسجيل دخول</span>
+          <span data-lang="en">Sign in</span>
+          <span data-lang="de">Anmelden</span>
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.body.className = 'lang-' + lang;
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang ||
+          (lang === 'ar' && b.textContent.trim() === 'ع'));
+      });
+      localStorage.setItem('iq_lang', lang);
+    }
+    // Restore saved language
+    const saved = localStorage.getItem('iq_lang') || 'ar';
+    setLang(saved);
+  </script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/circuit.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
